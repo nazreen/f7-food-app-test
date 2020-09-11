@@ -24,10 +24,10 @@
     </f7-col>
     <f7-col width="25">
       <f7-segmented>
-        <f7-button outline small class="minus">
+        <f7-button outline small class="minus" @click="showToastRemoved">
           <f7-icon f7="minus" color="black"></f7-icon>
         </f7-button>
-        <f7-button outline small class="plus">
+        <f7-button outline small class="plus" @click="showToastAdded">
           <f7-icon f7="plus" color="black"></f7-icon>
         </f7-button>
       </f7-segmented>
@@ -52,7 +52,7 @@ export default {
     toast: Object
   },
   created() {
-
+    
   },
   computed: {
     display() {
@@ -66,6 +66,32 @@ export default {
         popular: product.review_count >= 1
       }
     }
+  },
+  methods: {
+    showToastRemoved() {
+      const self = this;
+        // Create toast
+        if (!self.remove) {
+          self.remove = self.$f7.toast.create({
+            text: 'Product removed from cart',
+            closeTimeout: 2000,
+          });
+        }
+        // Open it
+        self.remove.open();
+    },
+    showToastAdded() {
+      const self = this;
+        // Create toast
+        if (!self.add) {
+          self.add = self.$f7.toast.create({
+            text: 'Product added to cart',
+            closeTimeout: 2000,
+          });
+        }
+        // Open it
+        self.add.open();
+    },
   }
 }
 </script>
