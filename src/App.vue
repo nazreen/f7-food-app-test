@@ -9,7 +9,7 @@
           </div>
         </div>
       </main>
-      <f7-fab position="center-bottom" slot="fixed" text="Menu" color="red">
+      <f7-fab position="center-bottom" slot="fixed" text="Menu" color="blue">
         <f7-icon f7="menu"></f7-icon>
       </f7-fab>
   </f7-page>
