@@ -1,13 +1,18 @@
 <template>
   <f7-app :params="$root.f7params">
-  <main>
-    <div v-if="this.appState === 'LOADING'">loading...</div>
-    <div v-else>
-      <div v-for="product in products" :key="product.id">
-        <product-card :product="product" :toast="toast"/>
-      </div>
-    </div>
-  </main>
+    <f7-page>
+      <main>
+        <div v-if="this.appState === 'LOADING'">loading...</div>
+        <div v-else>
+          <div v-for="product in products" :key="product.id">
+            <product-card :product="product" :toast="toast"/>
+          </div>
+        </div>
+      </main>
+      <f7-fab position="center-bottom" slot="fixed" text="Menu" color="red">
+        <f7-icon f7="menu"></f7-icon>
+      </f7-fab>
+  </f7-page>
   </f7-app>
 </template>
 
