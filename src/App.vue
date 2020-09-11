@@ -1,28 +1,35 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <main>
+    <div v-if="this.appState === 'LOADING'">loading...</div>
+    <div v-else>
+      <div v-for="product in products" :key="product.id">
+        <product-card :product="product" />
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { getProducts } from './services/api'
+import { APP_STATES } from './constants'
+import ProductCard from './components/ProductCard.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ProductCard
+  },
+  data: () => ({
+    appState: '',
+    products: []
+  }),
+  async created() {
+    this.appState = APP_STATES.LOADING
+    this.products = await getProducts()
+    this.appState = APP_STATES.READY
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
 </style>
